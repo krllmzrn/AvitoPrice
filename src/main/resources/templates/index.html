@@ -8,23 +8,44 @@
 </head>
 <body>
 <h1 align="center">Hello, world!</h1>
-<table class="table" align="center">
-    <thead>
-    <tr>
-        <th>microcategory_id</th>
-        <th>location_id</th>
-        <th>price</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="baselineMatrix : ${BaselineMatrix}">
-        <td th:text="${baselineMatrix.id.microcategoryId}"></td>
-        <td th:text="${baselineMatrix.id.locationId}"></td>
-        <td th:text="${baselineMatrix.price}"></td>
-
-    </tr>
-    </tbody>
-</table>
+<nav  aria-label="Page navigation example"  th:if="${baselinePage.getTotalPages() > 7}">
+    <ul class="pagination justify-content-center pagination-sm">
+        <li class="page-item" th:class="${baselinePage.first ? 'disabled' : ''}">
+            <a class="page-link" th:href="@{/(page=0)}">First</a>
+        </li>
+        <li th:each="pageNumber : ${#numbers.sequence(0, baselinePage.getTotalPages() - 1)}"
+            th:if="${pageNumber >= baselinePage.number - 3 and pageNumber <= baselinePage.number + 3}"
+            class="page-item" th:class="${pageNumber == baselinePage.number ? 'active' : ''}">
+            <a class="page-link" th:href="@{/(page=${pageNumber})}" th:text="${pageNumber + 1}"></a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" th:href="@{/(page=${baselinePage.getTotalPages() - 1})}">Last</a>
+        </li>
+        <li>
+        </li>
+    </ul>
+</nav>
+<table class="table" align="center" border="1px" style="width:50%">
+        <thead>
+        <tr>
+            <th>microcategory_id</th>
+            <th>location_id</th>
+            <th>price</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="baselineMatrix : ${baselinePage.content}">
+        <tr th:each="baselineMatrix : ${baselinePage}">
+            <td th:text="${baselineMatrix.id.microcategoryId}"></td>
+            <td th:text="${baselineMatrix.id.locationId}"></td>
+            <td th:text="${baselineMatrix.price}"></td>
+            <td style="white-space: nowrap">
+                <a class="btn btn-primary btn-sm"
+                   th:href="@{BaselineMatrix/edit(id=${baselineMatrix.id})}">Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
