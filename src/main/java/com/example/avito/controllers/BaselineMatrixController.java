@@ -35,17 +35,17 @@ public class BaselineMatrixController {
         model.addAttribute("totalPages", totalPages);
         return "baselineTable"; // Перенаправляем на страницу с выбранной таблицей и пагинацией
     }
-
+    @PostMapping("/showSelectedTable")
+    public String copyTable(@RequestParam String selectedTableName, RedirectAttributes redirectAttributes) {
+        String copiedTableName = tableCopyService.createAndCopyUserSelectedTable(selectedTableName);
+        redirectAttributes.addAttribute("tableName", copiedTableName);
+        return "redirect:/editTable"; // Перенаправляем на страницу редактирования созданной копии таблицы
+    }
+    @GetMapping("/editTable")
+    public String editTable(@RequestParam String tableName, Model model) {
+        // Логика для отображения страницы редактирования таблицы с названием tableName
+        return "editTablePage"; // Вернуть страницу редактирования таблицы
+    }
 }
-//    @PostMapping("/copyTable")
-//    public String copyTable(@RequestParam String selectedTableName, RedirectAttributes redirectAttributes) {
-//        String copiedTableName = tableCopyService.createAndCopyUserSelectedTable(selectedTableName);
-//        redirectAttributes.addAttribute("tableName", copiedTableName);
-//        return "redirect:/editTable"; // Перенаправляем на страницу редактирования созданной копии таблицы
-//    }
-//    @GetMapping("/editTable")
-//    public String editTable(@RequestParam String tableName, Model model) {
-//        // Логика для отображения страницы редактирования таблицы с названием tableName
-//        return "editTablePage"; // Вернуть страницу редактирования таблицы
-//    }
+
 

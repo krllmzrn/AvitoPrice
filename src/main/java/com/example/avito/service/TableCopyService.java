@@ -30,11 +30,11 @@ public class TableCopyService {
         jdbcTemplate.update(createTableQuery);
     }
     private String generateNewTableName(String baseTableName) {
-        String getMaxNumberQuery = "SELECT MAX(CAST(SUBSTRING(table_name, LENGTH('" + baseTableName + "') + 1) AS UNSIGNED)) FROM information_schema.tables WHERE table_name LIKE '" + baseTableName + "%'";
+        String getMaxNumberQuery = "SELECT MAX(CAST(SUBSTRING(table_name, LENGTH('" + "baseline_matrix_" + "') + 1) AS UNSIGNED)) FROM information_schema.tables WHERE table_name LIKE '" + "baseline_matrix_" + "%'";
         Integer maxNumber = jdbcTemplate.queryForObject(getMaxNumberQuery, Integer.class);
         int newNumber = maxNumber != null ? maxNumber + 1 : 1;
 
-        return baseTableName + "_" + newNumber;
+        return "baseline_matrix_" + newNumber;
     }
     public List<String> findTablesStartingWith(String prefix) {
         String searchQuery = "SELECT table_name FROM information_schema.tables WHERE table_name LIKE '" + prefix + "%'";

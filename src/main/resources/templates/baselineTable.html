@@ -7,7 +7,10 @@
 </head>
 <body>
 <h5>Table: <span th:text="${tableName}"></span></h5>
-
+<form th:action="@{/showSelectedTable}" method="post">
+  <input type="hidden" name="selectedTableName" th:value="${tableName}" />
+  <button type="submit">Сделать копию</button>
+</form>
 <div th:if="${totalPages > 1}">
   <ul class="pagination">
     <li th:each="page : ${#numbers.sequence(0, totalPages-1)}" th:class="${page == pageNumber ? 'page-item active' : 'page-item'}">
