@@ -9,39 +9,16 @@
 <body>
 <div class="container" style="margin-left:0px; margin-top: 20px">
     <h5>Список таблиц:</h5>
-    <form method="post" th:action="@{/}">
+    <form th:action="@{/showSelectedTable}" method="get">
         <div class="form-group">
-            <select class="form-control" id="tableSelect" name="tableSelect" style="width:25%">
-                <option value="">Выберите таблицу</option>
-                <th:block th:each="tableName : ${tableNames}">
-                    <option th:text="${tableName}"></option>
-                </th:block>
+            <select class="form-control" id="tableSelect" name="tableName" style="width:25%">
+                <option th:each="tableName : ${tableNames}" th:value="${tableName}" th:text="${tableName}"></option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary" style="margin-top: 10px">Отправить</button>
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px">Показать таблицу</button>
     </form>
 </div>
-<div class="container" style="margin-top: 20px;margin-left: 0px">
-    <h5>Выбранная таблица: <span th:text="${tableName}"></span></h5>
-</div>
-<div th:if="${selectedTable}">
 
-    <table class="table" align="center" border="1px" style="width:50%">
-        <thead>
-        <tr>
-            <th>microcategory_id</th>
-            <th>location_id</th>
-            <th>price</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="baselineMatrix : ${selectedTable}">
-            <td th:text="${baselineMatrix['microcategory_id']}"></td>
-            <td th:text="${baselineMatrix['location_id']}"></td>
-            <td th:text="${baselineMatrix['price']}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+
 </body>
 </html>

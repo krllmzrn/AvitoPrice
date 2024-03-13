@@ -45,4 +45,9 @@ public class TableCopyService {
         String query = "SELECT * FROM " + tableName + " LIMIT " + pageSize + " OFFSET " + offset;
         return jdbcTemplate.queryForList(query);
     }
+    public int getTotalRows(String tableName) {
+        String query = "SELECT COUNT(*) FROM " + tableName;
+        int totalRows = jdbcTemplate.queryForObject(query, Integer.class);
+        return totalRows;
+    }
 }
