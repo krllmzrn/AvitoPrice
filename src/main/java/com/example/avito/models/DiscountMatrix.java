@@ -11,20 +11,4 @@ public class DiscountMatrix {
     @Basic
     @Column(name = "price")
     private int price;
-
-    public DiscountMatrixId getId() {
-        return id;
-    }
-
-    public void setId(DiscountMatrixId id) {
-        this.id = id;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
 }

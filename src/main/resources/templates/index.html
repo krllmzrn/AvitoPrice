@@ -7,45 +7,41 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-<h1 align="center">Hello, world!</h1>
-<nav  aria-label="Page navigation example"  th:if="${baselinePage.getTotalPages() > 7}">
-    <ul class="pagination justify-content-center pagination-sm">
-        <li class="page-item" th:class="${baselinePage.first ? 'disabled' : ''}">
-            <a class="page-link" th:href="@{/(page=0)}">First</a>
-        </li>
-        <li th:each="pageNumber : ${#numbers.sequence(0, baselinePage.getTotalPages() - 1)}"
-            th:if="${pageNumber >= baselinePage.number - 3 and pageNumber <= baselinePage.number + 3}"
-            class="page-item" th:class="${pageNumber == baselinePage.number ? 'active' : ''}">
-            <a class="page-link" th:href="@{/(page=${pageNumber})}" th:text="${pageNumber + 1}"></a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" th:href="@{/(page=${baselinePage.getTotalPages() - 1})}">Last</a>
-        </li>
-        <li>
-        </li>
-    </ul>
-</nav>
-<table class="table" align="center" border="1px" style="width:50%">
+<div class="container" style="margin-left:0px; margin-top: 20px">
+    <h5>Список таблиц:</h5>
+    <form method="post" th:action="@{/}">
+        <div class="form-group">
+            <select class="form-control" id="tableSelect" name="tableSelect" style="width:25%">
+                <option value="">Выберите таблицу</option>
+                <th:block th:each="tableName : ${tableNames}">
+                    <option th:text="${tableName}"></option>
+                </th:block>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px">Отправить</button>
+    </form>
+</div>
+<div class="container" style="margin-top: 20px;margin-left: 0px">
+    <h5>Выбранная таблица: <span th:text="${tableName}"></span></h5>
+</div>
+<div th:if="${selectedTable}">
+
+    <table class="table" align="center" border="1px" style="width:50%">
         <thead>
         <tr>
             <th>microcategory_id</th>
             <th>location_id</th>
             <th>price</th>
-            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="baselineMatrix : ${baselinePage.content}">
-        <tr th:each="baselineMatrix : ${baselinePage}">
-            <td th:text="${baselineMatrix.id.microcategoryId}"></td>
-            <td th:text="${baselineMatrix.id.locationId}"></td>
-            <td th:text="${baselineMatrix.price}"></td>
-            <td style="white-space: nowrap">
-                <a class="btn btn-primary btn-sm"
-                   th:href="@{BaselineMatrix/edit(id=${baselineMatrix.id})}">Edit</a>
-            </td>
+        <tr th:each="baselineMatrix : ${selectedTable}">
+            <td th:text="${baselineMatrix['microcategory_id']}"></td>
+            <td th:text="${baselineMatrix['location_id']}"></td>
+            <td th:text="${baselineMatrix['price']}"></td>
         </tr>
         </tbody>
     </table>
+</div>
 </body>
 </html>
