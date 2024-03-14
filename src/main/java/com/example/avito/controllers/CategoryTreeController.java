@@ -1,15 +1,16 @@
 package com.example.avito.controllers;
 
 import com.example.avito.models.Microcategory_tree;
+
 import com.example.avito.service.TableCopyService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.sql.DataSource;
+
 import java.util.*;
 import java.util.Map.Entry;
 

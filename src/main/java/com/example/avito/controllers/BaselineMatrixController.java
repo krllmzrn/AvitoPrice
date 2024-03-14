@@ -2,6 +2,7 @@ package com.example.avito.controllers;
 
 import com.example.avito.models.Location_tree;
 import com.example.avito.models.Microcategory_tree;
+
 import com.example.avito.service.TableCopyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,6 @@ public class BaselineMatrixController {
     HashMap<String, String[]> location = locationTree.getLocationTree();
     @Autowired
     TableCopyService tableCopyService;
-
     @GetMapping("/")
     public String showTables(Model model) {
         List<String> tableBaselineNames = tableCopyService.findTablesStartingWith("baseline_matrix_");

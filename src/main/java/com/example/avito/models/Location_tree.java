@@ -3,9 +3,7 @@ package com.example.avito.models;
 import java.util.HashMap;
 
 public class Location_tree {
-    public HashMap<String, String[]> getLocationTree(){
-        return location_tree;
-    }
+
     HashMap<String, String[]> location_tree = new HashMap<>();
 
     public HashMap<String, String[]> getLocationTree(){
