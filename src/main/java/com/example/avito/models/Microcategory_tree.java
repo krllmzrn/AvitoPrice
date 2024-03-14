@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Microcategory_tree {
 
-     HashMap<String, String[]> microcategory_tree = new HashMap<>();
+    private HashMap<String, String[]> microcategory_tree = new HashMap<>();
 
     public Microcategory_tree() {
         microcategory_tree.put("Бытовая электроника", new String[]{"Товары для компьютера", "Фототехника", "Телефоны", "Планшеты и электронные книги", "Оргтехника и расходники", "Ноутбуки", "Настольные компьютеры", "Игры, приставки и программы", "Аудио и видео"});
@@ -18,6 +18,9 @@ public class Microcategory_tree {
         microcategory_tree.put( "Транспорт", new String[]  {"Автомобили", "Запчасти и аксессуары", "Грузовики и спецтехника", "Водный транспорт", "Мотоциклы и мототехника"});
         microcategory_tree.put("Услуги", new String[]{"Предложения услуг"});
         microcategory_tree.put("Хобби и отдых", new String[]  {"Охота и рыбалка", "Спорт и отдых", "Коллекционирование", "Книги и журналы", "Велосипеды", "Музыкальные инструменты", "Билеты и путешествия"});
+    }
+    public HashMap<String, String[]> getMicrocategoryTree(){
+        return microcategory_tree;
     }
 }
 
