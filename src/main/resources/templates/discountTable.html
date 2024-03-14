@@ -11,7 +11,7 @@
 <form th:action="@{/}" method="get" style="display: inline-block; ">
   <button type="submit" class="btn btn-primary" style="margin-top: 10px">Назад</button>
 </form>
-<form th:action="@{/showSelectedBaselineTable}" method="post" style="display: inline-block;">
+<form th:action="@{/showSelectedDiscountTable}" method="post" style="display: inline-block;">
   <input type="hidden" name="selectedTableName" th:value="${tableName}" />
   <button type="submit" class="btn btn-primary" style="margin-top: 10px">Сохранить изменения</button>
 </form>
@@ -22,7 +22,7 @@
     </li>
   </ul>
 </div>
-<form th:action="@{/showSelectedBaselineTable}" method="post" id="saveEditedForm">
+<form th:action="@{/showSelectedDiscountTable}" method="post" id="saveEditedForm">
   <input type="hidden" name="selectedTableName" th:value="${tableName}" />
   <div th:if="${selectedTable}">
     <table class="table" align="center" border="1px" style="width:50%">
@@ -34,21 +34,21 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="baselineMatrix : ${selectedTable}">
-        <td th:text="${baselineMatrix.microcategory_id}">
+      <tr th:each="discountMatrix : ${selectedTable}">
+        <td th:text="${discountMatrix.microcategory_id}">
         </td>
-        <td th:text="${baselineMatrix.location_id}">
+        <td th:text="${discountMatrix.location_id}">
         </td>
         <td>
-          <input type="text" name="editedPrices" th:value="${baselineMatrix.price}" />
-          <input type="hidden" name="location_id" th:value="${baselineMatrix.location_id}" />
-          <input type="hidden" name="microcategory_id" th:value="${baselineMatrix.microcategory_id}" />
+          <input type="text" name="editedPrices" th:value="${discountMatrix.price}" />
+          <input type="hidden" name="location_id" th:value="${discountMatrix.location_id}" />
+          <input type="hidden" name="microcategory_id" th:value="${discountMatrix.microcategory_id}" />
         </td>
       </tr>
       </tbody>
     </table>
   </div>
-<!--  <button type="submit" form="saveEditedForm" name="saveChangesButton" class="btn btn-primary">Save Changes</button>-->
+  <!--  <button type="submit" form="saveEditedForm" name="saveChangesButton" class="btn btn-primary">Save Changes</button>-->
 </form>
 </body>
 </html>
