@@ -1,18 +1,30 @@
 package com.example.avito.controllers;
 
+import com.example.avito.models.Location_tree;
+import com.example.avito.models.Microcategory_tree;
 import com.example.avito.service.TableCopyService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 public class BaselineMatrixController {
+
+    Microcategory_tree microcategory_tree = new Microcategory_tree();
+    HashMap<String, String[]> microcategory = microcategory_tree.getMicrocategoryTree();
+
+    Location_tree locationTree = new Location_tree();
+    HashMap<String, String[]> location = locationTree.getLocationTree();
+
     @Autowired
     TableCopyService tableCopyService;
 
@@ -33,6 +45,16 @@ public class BaselineMatrixController {
         int totalPages = (int) Math.ceil((double) totalRows / pageSize); // Общее количество страниц
         model.addAttribute("pageNumber", pageNumber);
         model.addAttribute("totalPages", totalPages);
+
+
+        List<String> category =  Arrays.asList(microcategory.keySet().toArray(new String[microcategory.keySet().size()]));
+        model.addAttribute("category", category);
+
+        List<String> locationTree = Arrays.asList(location.keySet().toArray(new String[location.keySet().size()]));
+        model.addAttribute("Region", locationTree);
+
+        //model.addAttribute("microcategory", microcategory.get())
+
         return "baselineTable"; // Перенаправляем на страницу с выбранной таблицей и пагинацией
     }
     @PostMapping("/showSelectedTable")
