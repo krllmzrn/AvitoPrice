@@ -1,12 +1,13 @@
 package com.example.avito.service;
 
-import com.example.avito.models.Microcategory_tree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class TableCopyService {
@@ -42,11 +43,8 @@ public class TableCopyService {
     public List<Map<String, Object>> getTableData(String tableName, int pageNumber, int pageSize) {
         int offset = pageNumber * pageSize;
         String query = "SELECT * FROM " + tableName + " LIMIT " + pageSize + " OFFSET " + offset;
-
         return jdbcTemplate.queryForList(query);
     }
-
-
     public int getTotalRows(String tableName) {
         String query = "SELECT COUNT(*) FROM " + tableName;
         int totalRows = jdbcTemplate.queryForObject(query, Integer.class);
