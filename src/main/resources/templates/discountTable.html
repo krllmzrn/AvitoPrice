@@ -17,8 +17,8 @@
 </form>
 <div style="margin-top: 10px" th:if="${totalPages > 1}">
   <ul class="pagination">
-    <li th:each="page : ${#numbers.sequence(0, totalPages-1)}" th:class="${page == pageNumber ? 'page-item active' : 'page-item'}">
-      <a class="page-link" th:href="@{/showSelectedTable(tableName=${tableName}, pageNumber=${page})}" th:text="${page + 1}"></a>
+    <li th:each="page : ${#numbers.sequence(0, totalPages-1)}" th:class="${page == pageNumber ?  'page-item active' : 'page-item'}">
+      <a class="page-link" th:href="@{/showSelectedTableDiscount(tableName=${tableName}, pageNumber=${page})}" th:text="${page + 1}"></a>
     </li>
   </ul>
 </div>
